@@ -1,0 +1,37 @@
+<div class="card shadow p-4">
+  <h3 class="mb-3">{{ isEdit ? 'Edit User' : 'Add User' }}</h3>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="mb-3">
+      <label>Name</label>
+      <input class="form-control" formControlName="name">
+    </div>
+
+    <div class="mb-3">
+      <label>Email</label>
+      <input class="form-control" formControlName="email">
+    </div>
+
+    <div class="mb-3">
+      <label>Role</label>
+      <select class="form-select" formControlName="role">
+        <option value="admin">Admin</option>
+        <option value="user">User</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label>Status</label>
+      <select class="form-select" formControlName="status">
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+    </div>
+
+    <button class="btn btn-success w-100">
+      {{ isEdit ? 'Update User' : 'Add User' }}
+    </button>
+
+  </form>
+</div>

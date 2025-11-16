@@ -1,0 +1,31 @@
+<div class="card shadow p-4">
+  <h3 class="mb-3">{{ isEdit ? 'Edit Product' : 'Add Product' }}</h3>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="mb-3">
+      <label>Name</label>
+      <input type="text" class="form-control" formControlName="name">
+    </div>
+
+    <div class="mb-3">
+      <label>Category</label>
+      <input type="text" class="form-control" formControlName="category">
+    </div>
+
+    <div class="mb-3">
+      <label>Price (₹)</label>
+      <input type="number" class="form-control" formControlName="price">
+    </div>
+
+    <div class="mb-3">
+      <label>Stock</label>
+      <input type="number" class="form-control" formControlName="stock">
+    </div>
+
+    <button class="btn btn-success w-100">
+      {{ isEdit ? 'Update Product' : 'Add Product' }}
+    </button>
+
+  </form>
+</div>
