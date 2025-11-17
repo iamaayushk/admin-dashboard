@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/shared/models/user.model';
+import { User } from '../../shared/models/user.model';
 
 
 @Injectable({
@@ -18,20 +18,21 @@ export class UserService {
 
     if (!existing || existing.length === 0) {
       const defaultUsers: User[] = [
-        {
-          id: 1,
-          name: 'Admin User',
-          email: 'admin@gmail.com',
-          role: 'admin',
-          status: 'active'
-        },
-        {
-          id: 2,
-          name: 'Normal User',
-          email: 'user@gmail.com',
-          role: 'user',
-          status: 'active'
-        }
+        { id: 1, name: 'Admin User', email: 'admin@gmail.com', role: 'admin', status: 'active' },
+        { id: 2, name: 'John Doe', email: 'john.doe@gmail.com', role: 'user', status: 'active' },
+        { id: 3, name: 'Jane Smith', email: 'jane.smith@gmail.com', role: 'user', status: 'active' },
+        { id: 4, name: 'Michael Johnson', email: 'michael.j@gmail.com', role: 'user', status: 'active' },
+        { id: 5, name: 'Sarah Williams', email: 'sarah.w@gmail.com', role: 'admin', status: 'active' },
+        { id: 6, name: 'David Brown', email: 'david.brown@gmail.com', role: 'user', status: 'inactive' },
+        { id: 7, name: 'Emily Davis', email: 'emily.davis@gmail.com', role: 'user', status: 'active' },
+        { id: 8, name: 'James Wilson', email: 'james.wilson@gmail.com', role: 'user', status: 'active' },
+        { id: 9, name: 'Jessica Martinez', email: 'jessica.m@gmail.com', role: 'user', status: 'active' },
+        { id: 10, name: 'Robert Taylor', email: 'robert.taylor@gmail.com', role: 'admin', status: 'active' },
+        { id: 11, name: 'Linda Anderson', email: 'linda.anderson@gmail.com', role: 'user', status: 'active' },
+        { id: 12, name: 'William Thomas', email: 'william.t@gmail.com', role: 'user', status: 'inactive' },
+        { id: 13, name: 'Elizabeth Garcia', email: 'elizabeth.g@gmail.com', role: 'user', status: 'active' },
+        { id: 14, name: 'Christopher Lee', email: 'chris.lee@gmail.com', role: 'user', status: 'active' },
+        { id: 15, name: 'Patricia White', email: 'patricia.white@gmail.com', role: 'user', status: 'active' }
       ];
 
       this.saveAll(defaultUsers);

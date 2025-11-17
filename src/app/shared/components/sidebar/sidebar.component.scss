@@ -1,4 +1,107 @@
-.active {
-  background: #0d6efd;
-  border-radius: 6px;
+.sidebar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--sidebar-bg);
+  color: white;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.3s ease;
+}
+
+.sidebar-header {
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.5);
+  
+  h4 {
+    color: #60a5fa;
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+}
+
+.sidebar-nav {
+  padding: 1rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  
+  .nav-item {
+    margin: 0.25rem 0.75rem;
+    
+    &.mt-auto {
+      margin-top: auto !important;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: #cbd5e1;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    
+    .icon {
+      font-size: 1.25rem;
+      margin-right: 0.75rem;
+      min-width: 24px;
+      text-align: center;
+    }
+    
+    span {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    
+    &:hover {
+      background: var(--sidebar-hover);
+      color: #60a5fa;
+      transform: translateX(4px);
+    }
+    
+    &.active {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+      
+      .icon {
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+      }
+    }
+    
+    &.logout-link {
+      &:hover {
+        background: rgba(239, 68, 68, 0.15);
+        color: #ef4444;
+      }
+    }
+  }
+}
+
+/* Scrollbar styling */
+.sidebar-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-container::-webkit-scrollbar-thumb {
+  background: rgba(96, 165, 250, 0.5);
+  border-radius: 3px;
+  
+  &:hover {
+    background: rgba(96, 165, 250, 0.7);
+  }
 }

@@ -1,7 +1,12 @@
-<nav class="navbar bg-light shadow-sm d-flex justify-content-between px-4">
-  <h4 class="mb-0">Dashboard</h4>
+<nav class="navbar-container">
+  <div class="navbar-content">
+    <h4 class="navbar-title">Dashboard</h4>
 
-  <button class="btn btn-outline-danger" (click)="logout()">
-    Logout
-  </button>
+    <div class="navbar-actions">
+      <button class="theme-toggle-btn" (click)="toggleTheme()"
+        [title]="(isDarkMode$ | async) ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+        <span class="theme-icon">{{ (isDarkMode$ | async) ? '☀️' : '🌙' }}</span>
+      </button>
+    </div>
+  </div>
 </nav>

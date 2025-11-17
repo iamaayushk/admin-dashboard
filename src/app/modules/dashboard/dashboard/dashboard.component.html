@@ -1,19 +1,104 @@
-<h2 class="mb-4">Dashboard Overview</h2>
+<!-- =============================== -->
+<!--        ADMIN DASHBOARD          -->
+<!-- =============================== -->
+<div *ngIf="isAdmin(); else userDashboard" class="dashboard-container">
 
-<div class="row g-4">
-  <div class="col-md-3" *ngFor="let s of stats">
-    <div class="card text-white bg-{{s.color}} shadow">
-      <div class="card-body">
-        <h5 class="card-title">{{ s.title }}</h5>
-        <h3>{{ s.value }}</h3>
+  <div class="dashboard-header">
+    <h2>Admin Dashboard</h2>
+    <p class="text-muted">Overview of your business metrics</p>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="row g-4 mb-4">
+    <div class="col-md-3" *ngFor="let s of stats">
+      <div class="stat-card stat-card-{{s.color}}">
+        <div class="stat-icon">{{ s.icon }}</div>
+        <div class="stat-content">
+          <h5 class="stat-title">{{ s.title }}</h5>
+          <h3 class="stat-value">{{ s.value }}</h3>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- CHARTS -->
+  <div class="row g-4">
+
+    <div class="col-md-8">
+      <div class="chart-card">
+        <h5 class="chart-title">📈 Sales Trend</h5>
+        <div class="chart-container">
+          <canvas #lineChart></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="chart-card">
+        <h5 class="chart-title">📊 Category Distribution</h5>
+        <div class="chart-container chart-container-pie">
+          <canvas #pieChart></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="chart-card">
+        <h5 class="chart-title">📦 Orders per Month</h5>
+        <div class="chart-container">
+          <canvas #barChart></canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
-<hr class="my-4">
+<!-- =============================== -->
+<!--        USER DASHBOARD           -->
+<!-- =============================== -->
+<ng-template #userDashboard>
 
-<h4>Welcome to your Admin Dashboard</h4>
-<p class="text-muted">
-  Use the sidebar to navigate to different sections of the panel.
-</p>
+  <div class="user-dashboard">
+    <div class="welcome-card">
+      <div class="welcome-header">
+        <div class="welcome-avatar">{{ user?.name?.charAt(0) || 'U' }}</div>
+        <div>
+          <h2>Welcome back, {{ user?.name }}! 👋</h2>
+          <p class="text-muted">You are logged in as a regular user.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-4">
+      <div class="col-md-6">
+        <div class="info-card">
+          <h4>📧 Account Information</h4>
+          <div class="info-item">
+            <span class="info-label">Name:</span>
+            <span class="info-value">{{ user?.name }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Email:</span>
+            <span class="info-value">{{ user?.email }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Role:</span>
+            <span class="info-value">{{ user?.role }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="info-card">
+          <h4>🚀 Quick Links</h4>
+          <div class="quick-actions">
+            <a class="action-btn" routerLink="/settings">⚙️ Go to Settings</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-template>

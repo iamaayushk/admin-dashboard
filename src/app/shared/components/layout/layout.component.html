@@ -1,18 +1,21 @@
-<div class="d-flex">
-  
-  <!-- Sidebar -->
+<div class="layout-wrapper">
+
+  <!-- Fixed Sidebar -->
   <app-sidebar></app-sidebar>
 
-  <!-- Main Area -->
-  <div class="flex-grow-1">
+  <!-- Main Content Area -->
+  <div class="main-content">
 
-    <!-- Navbar -->
+    <!-- Sticky Navbar -->
     <app-navbar></app-navbar>
 
-    <!-- Main Page Content -->
-    <div class="p-4">
+    <!-- Page Content -->
+    <div class="content-area">
       <router-outlet></router-outlet>
     </div>
 
   </div>
+
+  <!-- Toast Notifications -->
+  <app-toast></app-toast>
 </div>

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { UserService } from '../../../core/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../shared/models/user.model';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-user-form',
@@ -13,13 +14,7 @@ import { User } from '../../../shared/models/user.model';
 })
 export class UserFormComponent {
 
-  form = this.fb.group({
-    id: [null],
-    name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    role: ['user', Validators.required],
-    status: ['active', Validators.required]
-  });
+  form!: FormGroup;
 
   isEdit = false;
 
@@ -27,8 +22,17 @@ export class UserFormComponent {
     private fb: FormBuilder,
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    private router: Router,
+    private toastService: ToastService
+  ) {
+    this.form = this.fb.group({
+      id: [null],
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      role: ['user', Validators.required],
+      status: ['active', Validators.required]
+    });
+  }
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
@@ -42,14 +46,24 @@ export class UserFormComponent {
   }
 
   submit() {
-    const user = this.form.value as User;
+    if (this.form.valid) {
+      const user = this.form.value as User;
 
-    if (this.isEdit) {
-      this.userService.update(user);
+      if (this.isEdit) {
+        this.userService.update(user);
+        this.toastService.success('User updated successfully');
+      } else {
+        this.userService.add(user);
+        this.toastService.success('User created successfully');
+      }
+
+      this.router.navigate(['/users']);
     } else {
-      this.userService.add(user);
+      this.toastService.error('Please fill all required fields');
     }
+  }
 
+  cancel() {
     this.router.navigate(['/users']);
   }
 }

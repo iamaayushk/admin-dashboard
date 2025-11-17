@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './modules/auth/login/login.component';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component';
+import { SettingsComponent } from './modules/settings/settings.component';
 
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
@@ -18,6 +19,8 @@ export const routes: Routes = [
     children: [
 
       { path: 'dashboard', component: DashboardComponent },
+
+      { path: 'settings', component: SettingsComponent },
 
       // Users (Module-based load)
       {

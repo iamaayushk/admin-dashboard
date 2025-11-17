@@ -1,23 +1,45 @@
-<div class="bg-dark text-white vh-100 p-3" style="width: 250px;">
-  <h4 class="mb-4">Admin Panel</h4>
+<div class="sidebar-container">
+  <div class="sidebar-header">
+    <h4 class="mb-0">{{ isAdmin() ? 'Admin Panel' : 'User Panel' }}</h4>
+  </div>
 
-  <ul class="nav flex-column">
+  <ul class="nav flex-column sidebar-nav">
 
     <li class="nav-item">
-      <a routerLink="/dashboard" routerLinkActive="active" class="nav-link text-white">
-        Dashboard
+      <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
+        <i class="icon">📊</i>
+        <span>Dashboard</span>
       </a>
     </li>
 
-    <li class="nav-item">
-      <a routerLink="/users" routerLinkActive="active" class="nav-link text-white">
-        Users
+    <!-- Admin Only Links -->
+    <li class="nav-item" *ngIf="isAdmin()">
+      <a routerLink="/users" routerLinkActive="active" class="nav-link">
+        <i class="icon">👥</i>
+        <span>Users</span>
       </a>
     </li>
 
+    <li class="nav-item" *ngIf="isAdmin()">
+      <a routerLink="/products" routerLinkActive="active" class="nav-link">
+        <i class="icon">📦</i>
+        <span>Products</span>
+      </a>
+    </li>
+
+    <!-- Settings - Available for All Users -->
     <li class="nav-item">
-      <a routerLink="/products" routerLinkActive="active" class="nav-link text-white">
-        Products
+      <a routerLink="/settings" routerLinkActive="active" class="nav-link">
+        <i class="icon">⚙️</i>
+        <span>Settings</span>
+      </a>
+    </li>
+
+    <!-- Logout Button -->
+    <li class="nav-item mt-auto">
+      <a href="javascript:void(0)" (click)="logout()" class="nav-link logout-link">
+        <i class="icon">🚪</i>
+        <span>Logout</span>
       </a>
     </li>
 

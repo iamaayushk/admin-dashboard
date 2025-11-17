@@ -1,1 +1,218 @@
-/* You can add global styles to this file, and also import other style files */
+
+/* CSS Variables for Light Theme (Default) */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --card-bg: #ffffff;
+  --card-hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --navbar-bg: #ffffff;
+  --sidebar-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --sidebar-hover: rgba(255, 255, 255, 0.1);
+  --modal-overlay: rgba(0, 0, 0, 0.5);
+  --modal-bg: #ffffff;
+}
+
+/* Dark Theme Variables */
+body.dark-theme {
+  --bg-primary: #050914;
+  --bg-secondary: #091629;
+  --bg-tertiary: #334155;
+  --text-primary: #676f76;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+  --card-bg: #1e293b;
+  --card-hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  --input-bg: #334155;
+  --input-border: #475569;
+  --navbar-bg: #1e293b;
+  --sidebar-bg: linear-gradient(135deg, #4c1d95 0%, #5b21b6 100%);
+  --sidebar-hover: rgba(255, 255, 255, 0.15);
+  --modal-overlay: rgba(0, 0, 0, 0.7);
+  --modal-bg: #1e293b;
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Apply theme to common elements */
+.card {
+  background: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: background-color 0.3s ease, box-shadow 0.2s ease !important;
+  
+  &:hover {
+    box-shadow: var(--card-hover-shadow) !important;
+  }
+}
+
+.card-header,
+.card-body,
+.card-footer {
+  background: transparent !important;
+  border-color: var(--border-color) !important;
+}
+
+.card-title,
+.card-text,
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary) !important;
+}
+
+p, label {
+  color: var(--text-primary);
+}
+
+.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+/* Badge colors remain vibrant in both modes */
+.badge {
+  &.bg-success {
+    color: white !important;
+  }
+  
+  &.bg-danger, &.bg-warning {
+    color: white !important;
+  }
+  
+  &.bg-primary, &.bg-secondary, &.bg-info {
+    color: white !important;
+  }
+}
+
+/* Form controls */
+.form-control,
+.form-select {
+  background: var(--input-bg) !important;
+  border-color: var(--input-border) !important;
+  color: var(--text-primary) !important;
+  
+  &:focus {
+    background: var(--input-bg) !important;
+    border-color: #667eea !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25) !important;
+  }
+  
+  &::placeholder {
+    color: var(--text-muted) !important;
+  }
+}
+
+.form-label {
+  color: var(--text-primary) !important;
+}
+
+/* Table styles */
+.table {
+  color: var(--text-primary) !important;
+  
+  thead th {
+    background: var(--bg-tertiary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  tbody td {
+    border-color: var(--border-color) !important;
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  tbody tr:hover {
+    background: var(--bg-tertiary) !important;
+  }
+}
+
+/* Modal styles */
+.modal-overlay {
+  background: var(--modal-overlay) !important;
+}
+
+.modal-dialog {
+  background: var(--modal-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+  background: transparent !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+  
+  h5, p {
+    color: var(--text-primary) !important;
+  }
+}
+
+/* List group */
+.list-group-item {
+  background: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Pagination */
+.pagination {
+  .page-link {
+    background: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+    
+    &:hover {
+      background: var(--bg-tertiary) !important;
+    }
+  }
+  
+  .page-item.active .page-link {
+    background: #667eea !important;
+    border-color: #667eea !important;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 5px;
+  
+  &:hover {
+    background: var(--text-muted);
+  }
+}

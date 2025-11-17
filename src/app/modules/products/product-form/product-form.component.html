@@ -1,31 +1,117 @@
-<div class="card shadow p-4">
-  <h3 class="mb-3">{{ isEdit ? 'Edit Product' : 'Add Product' }}</h3>
+<div class="card shadow-lg border-0">
+  <div class="card-header bg-primary text-white">
+    <h3 class="mb-0">{{ isEdit ? '✏️ Edit Product' : '➕ Add New Product' }}</h3>
+  </div>
 
-  <form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="card-body p-4">
+    <form [formGroup]="form" (ngSubmit)="submit()">
 
-    <div class="mb-3">
-      <label>Name</label>
-      <input type="text" class="form-control" formControlName="name">
-    </div>
+      <!-- Image Upload Section -->
+      <div class="mb-4">
+        <label class="form-label fw-bold">📷 Product Image</label>
 
-    <div class="mb-3">
-      <label>Category</label>
-      <input type="text" class="form-control" formControlName="category">
-    </div>
+        <!-- Upload Method Toggle -->
+        <div class="btn-group w-100 mb-3" role="group">
+          <button type="button" class="btn" [class.btn-primary]="uploadMethod === 'url'"
+            [class.btn-outline-primary]="uploadMethod !== 'url'" (click)="uploadMethod = 'url'">
+            🔗 Image URL
+          </button>
+          <button type="button" class="btn" [class.btn-primary]="uploadMethod === 'file'"
+            [class.btn-outline-primary]="uploadMethod !== 'file'" (click)="uploadMethod = 'file'">
+            📁 Upload File
+          </button>
+        </div>
 
-    <div class="mb-3">
-      <label>Price (₹)</label>
-      <input type="number" class="form-control" formControlName="price">
-    </div>
+        <!-- URL Input -->
+        <div *ngIf="uploadMethod === 'url'">
+          <input type="text" class="form-control" formControlName="image"
+            placeholder="Enter image URL (e.g., https://example.com/image.jpg)">
+          <small class="text-muted">Paste an image URL from the web</small>
+        </div>
 
-    <div class="mb-3">
-      <label>Stock</label>
-      <input type="number" class="form-control" formControlName="stock">
-    </div>
+        <!-- File Upload -->
+        <div *ngIf="uploadMethod === 'file'">
+          <input type="file" class="form-control" accept="image/*" (change)="onFileSelected($event)">
+          <small class="text-muted">Choose an image file from your computer</small>
+        </div>
 
-    <button class="btn btn-success w-100">
-      {{ isEdit ? 'Update Product' : 'Add Product' }}
-    </button>
+        <!-- Image Preview -->
+        <div class="mt-3 position-relative" *ngIf="imagePreview">
+          <img [src]="imagePreview" class="img-fluid rounded border"
+            style="max-height: 300px; object-fit: cover; width: 100%;" alt="Product preview">
+          <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2" (click)="removeImage()">
+            ✕ Remove
+          </button>
+        </div>
 
-  </form>
+        <!-- Placeholder when no image -->
+        <div *ngIf="!imagePreview" class="mt-3 text-center p-5 bg-light rounded border">
+          <span class="text-muted">🖼️ No image selected</span>
+        </div>
+      </div>
+
+      <!-- Product Name -->
+      <div class="mb-3">
+        <label class="form-label fw-bold">📝 Product Name *</label>
+        <input type="text" class="form-control"
+          [class.is-invalid]="form.get('name')?.invalid && form.get('name')?.touched" formControlName="name"
+          placeholder="Enter product name">
+        <div class="invalid-feedback" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+          {{ getErrorMessage('name') }}
+        </div>
+      </div>
+
+      <!-- Category -->
+      <div class="mb-3">
+        <label class="form-label fw-bold">📦 Category *</label>
+        <select class="form-select" [class.is-invalid]="form.get('category')?.invalid && form.get('category')?.touched"
+          formControlName="category">
+          <option value="">Select a category</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Furniture">Furniture</option>
+          <option value="Storage">Storage</option>
+          <option value="Wearables">Wearables</option>
+          <option value="Audio">Audio</option>
+          <option value="Computing">Computing</option>
+        </select>
+        <div class="invalid-feedback" *ngIf="form.get('category')?.invalid && form.get('category')?.touched">
+          {{ getErrorMessage('category') }}
+        </div>
+      </div>
+
+      <!-- Price and Stock Row -->
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label fw-bold">💰 Price (₹) *</label>
+          <input type="number" class="form-control"
+            [class.is-invalid]="form.get('price')?.invalid && form.get('price')?.touched" formControlName="price"
+            placeholder="0.00" min="0">
+          <div class="invalid-feedback" *ngIf="form.get('price')?.invalid && form.get('price')?.touched">
+            {{ getErrorMessage('price') }}
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label fw-bold">📊 Stock Quantity *</label>
+          <input type="number" class="form-control"
+            [class.is-invalid]="form.get('stock')?.invalid && form.get('stock')?.touched" formControlName="stock"
+            placeholder="0" min="0">
+          <div class="invalid-feedback" *ngIf="form.get('stock')?.invalid && form.get('stock')?.touched">
+            {{ getErrorMessage('stock') }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="d-flex gap-2 mt-4">
+        <button type="submit" class="btn btn-success flex-fill" [disabled]="form.invalid">
+          {{ isEdit ? '💾 Update Product' : '➕ Create Product' }}
+        </button>
+        <button type="button" class="btn btn-secondary" routerLink="/products">
+          ❌ Cancel
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
